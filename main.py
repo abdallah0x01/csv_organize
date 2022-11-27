@@ -20,16 +20,16 @@ with open('Tent and Bed Orders.csv', 'r', encoding='utf-8') as csv_file:
 
 with open('tents.csv', 'a') as tents_file:
     csv_writer = csv.writer(tents_file)
-    csv_writer.writerow(['Order Number', 'Check In', 'Check Out', 'No.Reserved Days'])
+    csv_writer.writerow(['Tent ID', 'Order Number', 'Check In', 'Check Out', 'No.Reserved Days'])
 
-    for order_number, ckeck_in, check_out in zip(order_number_list, check_in_list, check_out_list):
+    for tent_id, order_number, ckeck_in, check_out in zip(list(range(1, len(order_number_list) + 1)), order_number_list, check_in_list, check_out_list):
         splited_check_in_date = ckeck_in.split('/')
-        check_in_date = date(int(splited_check_in_date[2]), int(splited_check_in_date[0]),int(splited_check_in_date[1]))
+        check_in_date = date(int(splited_check_in_date[2]), int(splited_check_in_date[0]), int(splited_check_in_date[1]))
         splited_check_out_date = check_out.split('/')
         check_out_date = date(int(splited_check_out_date[2]), int(splited_check_out_date[0]), int(splited_check_out_date[1]))
         no_reseved_days = (check_out_date - check_in_date).days
 
-        csv_writer.writerow([order_number, ckeck_in, check_out, no_reseved_days])
+        csv_writer.writerow([tent_id, order_number, ckeck_in, check_out, no_reseved_days])
 
 end = time.perf_counter()
 
